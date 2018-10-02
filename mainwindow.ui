@@ -17,10 +17,10 @@
    <widget class="Traffic" name="traffic">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>40</y>
-      <width>300</width>
-      <height>200</height>
+      <x>9</x>
+      <y>9</y>
+      <width>381</width>
+      <height>231</height>
      </rect>
     </property>
    </widget>

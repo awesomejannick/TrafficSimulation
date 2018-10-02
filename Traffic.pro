@@ -25,9 +25,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-        traffic.cpp
+    rendering.cpp \
+    simulation.cpp \
+    site.cpp
 
 HEADERS  += mainwindow.h \
-            traffic.h
+            traffic.h \
+    site.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += resources.qrc \

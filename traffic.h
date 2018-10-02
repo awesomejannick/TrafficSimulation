@@ -6,7 +6,13 @@
 #include <QOpenGLWidget>
 #include <QOpenGLDebugLogger>
 #include <QOpenGLShaderProgram>
+
+#include <QVector>
+#include <QVector2D>
+#include <QVector3D>
+
 #include "mainwindow.h"
+#include "site.h"
 
 class Traffic : public QOpenGLWidget, protected QOpenGLFunctions_4_4_Core {
     Q_OBJECT
@@ -18,15 +24,25 @@ public:
 private:
     void initializeGL();
     void resizeGL(int w, int h);
+    void createShaderPrograms();
+    void createBuffers();
     void paintGL();
+    void renderTraffic();
 
-    static float tau = 0.5;     //relaxation time
-    static int th0 = 45;        //initial velocity variance
-    static int k0 = 600;        //flux of velocity variance
-    static int dt = 750;        //timestep
-    static int v0 = 120;        //initial speed
-    static int eta0 = 600;      //viscosity coefficient
-    static int l = 5;           //car length
+    void updateTraffic();
+
+    QOpenGLShaderProgram *shaderProg;
+    GLuint VAO, coordVBO, colorVBO;
+
+    QVector<QVector<Site>> road;
+
+    /*tatic constexpr float tau = 0.5; //relaxation time
+    static const int th0 = 45;        //initial velocity variance
+    static const int k0 = 600;        //flux of velocity variance
+    static const int dt = 750;        //timestep
+    static const int v0 = 120;        //initial speed
+    static const int eta0 = 600;      //viscosity coefficient
+    static const int l = 5;           //car length*/
 };
 
 #endif // TRAFFIC_H

@@ -41,7 +41,7 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         traffic = new Traffic(centralWidget);
         traffic->setObjectName(QStringLiteral("traffic"));
-        traffic->setGeometry(QRect(30, 40, 300, 200));
+        traffic->setGeometry(QRect(9, 9, 381, 231));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
