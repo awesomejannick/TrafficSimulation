@@ -47,20 +47,21 @@ void MainWindow::updateLane(int lane) {
     //TODO: better variable names
     int n = road.size();
     QVector<QVector<Site>> road2 = road;
-    float pn = averageDensity(lane);
+    float pn = averageDensity();
+    float w = abs(pn * pn * -1 / (pow(pn*cosh(1/pc - 1/pn),2)));
+    float l1 = lane, l2 = (lane+1)%NLANES;
 
     for (int i = 0; i < n; i++) {
         // formula 1
-        float dp = road[i][lane].getDensity() * road[i][lane].getVelocity() -
-        road[(i-1+n)%n][lane].getDensity() * road[(i-1+n)%n][lane].getVelocity();
-        road2[i][lane].setDensity(road[i][lane].getDensity() - dp*pn);
+        float dp = w*(road[(i+1)%n][l2].getDensity() - 2*road[i][l1].getDensity() + road[(i+n-1)%n][l2].getDensity())
+           - pn*(road[i][l1].getDensity()*road[i][l1].getVelocity() - road[(i+n-1)%n][l1].getDensity()*road[(i+n-1)%n][l1].getVelocity());
+        road2[i][lane].setDensity(road[i][lane].getDensity() + dp);
         // formula 2
         float nv = (pn * road[(i+1)%n][lane].optimalVelocity(pn, pc)) / road2[i][lane].getDensity();
         road2[i][lane].setVelocity(nv);
     }
 
     road = road2;
-
 }
 
 void MainWindow::plotLane(int lane) {
@@ -75,10 +76,11 @@ void MainWindow::plotLane(int lane) {
     ui->widget->graph(lane)->setData(indices, densities);
 }
 
-float MainWindow::averageDensity(int lane) {
+float MainWindow::averageDensity() {
     double total = 0;
     for (int i = 0; i < road.size(); i++) {
-        total += road[i][lane].getDensity();
+        total += road[i][0].getDensity();
+        total += road[i][1].getDensity();
     }
-    return total / (road.size());
+    return total / (road.size()*2);
 }

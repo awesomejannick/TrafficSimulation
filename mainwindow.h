@@ -38,7 +38,7 @@ private:
 
     void updateLane(int lane);
     void plotLane(int lane);
-    float averageDensity(int lane);
+    float averageDensity();
 
     QOpenGLShaderProgram *shaderProg;
     GLuint VAO, coordVBO, colorVBO;
@@ -46,6 +46,7 @@ private:
     QVector<QVector<Site>> road;
 
     static constexpr float pc = 0.175; //TODO: tweak variable
+    static constexpr float g = 0.2;
     static const int NLANES = 2;
 
     /*tatic constexpr float tau = 0.5; //relaxation time
