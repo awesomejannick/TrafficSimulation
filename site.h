@@ -3,11 +3,13 @@
 
 #include <math.h>
 #include <QTimer>
+#include <cstdlib>
 
 class Site
 {
 public:
     Site();
+    Site(float density);
     void update();
     void setDensity(float p);
     void setVelocity(float v);

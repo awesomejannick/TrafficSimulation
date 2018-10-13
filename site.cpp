@@ -1,8 +1,12 @@
 #include "site.h"
 
 Site::Site() {
-    density = 100;
-    velocity = 100;
+
+}
+
+Site::Site(float density) {
+    this->density = density;
+    this->velocity = 1;
 }
 
 float Site::optimalVelocity(float pn, float pc) {

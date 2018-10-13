@@ -14,13 +14,13 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="Traffic" name="traffic">
+   <widget class="QCustomPlot" name="widget" native="true">
     <property name="geometry">
      <rect>
       <x>9</x>
       <y>9</y>
-      <width>381</width>
-      <height>231</height>
+      <width>371</width>
+      <height>221</height>
      </rect>
     </property>
    </widget>
@@ -48,9 +48,10 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>Traffic</class>
-   <extends>QOpenGLWidget</extends>
-   <header>traffic.h</header>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header>qcustomplot.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>
