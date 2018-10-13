@@ -32,7 +32,7 @@ void Traffic::createBuffers() {
     glGenBuffers(1, &coordVBO);
     glBindBuffer(GL_ARRAY_BUFFER, coordVBO);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
     glGenBuffers(1, &colorVBO);
     glBindBuffer(GL_ARRAY_BUFFER, colorVBO);
@@ -43,7 +43,7 @@ void Traffic::createBuffers() {
 }
 
 void Traffic::paintGL() {
-    glClearColor(1, 0, 0, 1);
+    glClearColor(1, 1, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     // Bind shader
@@ -68,19 +68,16 @@ void Traffic::resizeGL(int w, int h) {
 }
 
 void Traffic::renderTraffic() {
-    QVector<QVector2D> rendercoords(6);
-    rendercoords.append(QVector2D(0,0.25));
-    rendercoords.append(QVector2D(1,0.25));
-    rendercoords.append(QVector2D(0,0.50));
-    rendercoords.append(QVector2D(1,0.50));
-    rendercoords.append(QVector2D(0,0.75));
-    rendercoords.append(QVector2D(1,0.75));
-    QVector<QVector3D> rendercolors(6,QVector3D(1,1,1));
+    QVector<QVector3D> rendercoords(6);
+    rendercoords.append(QVector3D(0,0,0));
+    rendercoords.append(QVector3D(1,1,0));
+    rendercoords.append(QVector3D(0.5,1,0));
+    QVector<QVector3D> rendercolors(3,QVector3D(1,1,1));
 
     glBindBuffer(GL_ARRAY_BUFFER, coordVBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(QVector2D) * rendercoords.size(), rendercoords.data(), GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(QVector3D) * rendercoords.size(), rendercoords.data(), GL_DYNAMIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, colorVBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(QVector3D) * rendercolors.size(), rendercolors.data(), GL_DYNAMIC_DRAW);
 
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawArrays(GL_LINE_LOOP, 0, 3);
 }

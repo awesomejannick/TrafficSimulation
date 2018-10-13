@@ -2,16 +2,20 @@
 #define SITE_H
 
 #include <math.h>
-#define p0
+#include <QTimer>
 
 class Site
 {
 public:
     Site();
     void update();
-private:
-    float optimalVelocity();
+    void setDensity(float p);
+    void setVelocity(float v);
+    float getDensity();
+    float getVelocity();
+    float optimalVelocity(float pn, float pc);
 
+private:
     float density;
     float velocity;
 };

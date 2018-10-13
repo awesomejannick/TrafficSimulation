@@ -21,6 +21,8 @@ public:
     Traffic(QWidget *parent = 0);
     ~Traffic();
 
+    void updateTraffic();
+
 private:
     void initializeGL();
     void resizeGL(int w, int h);
@@ -29,12 +31,15 @@ private:
     void paintGL();
     void renderTraffic();
 
-    void updateTraffic();
+    float averageDensity();
 
     QOpenGLShaderProgram *shaderProg;
     GLuint VAO, coordVBO, colorVBO;
 
     QVector<QVector<Site>> road;
+
+    static constexpr float pc = 0.1; //TODO: tweak variable
+
 
     /*tatic constexpr float tau = 0.5; //relaxation time
     static const int th0 = 45;        //initial velocity variance
