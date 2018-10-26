@@ -17,6 +17,7 @@
 #include <QVector3D>
 
 #include "site.h"
+#define rlength 101
 
 namespace Ui {
 class MainWindow;
@@ -32,6 +33,8 @@ public:
 
 private slots:
     void updateTraffic();
+    void on_modeButton0_toggled(bool checked);
+    void on_modeButton1_toggled(bool checked);
 
 private:
     Ui::MainWindow *ui;
@@ -39,6 +42,7 @@ private:
     void updateLane(int lane);
     void plotLane(int lane);
     float averageDensity();
+    void setMode(int mode);
 
     QOpenGLShaderProgram *shaderProg;
     GLuint VAO, coordVBO, colorVBO;
@@ -47,15 +51,18 @@ private:
 
     static constexpr float pc = 0.175; //TODO: tweak variable
     static constexpr float g = 0.2;
-    static const int NLANES = 2;
 
-    /*tatic constexpr float tau = 0.5; //relaxation time
-    static const int th0 = 45;        //initial velocity variance
-    static const int k0 = 600;        //flux of velocity variance
-    static const int dt = 750;        //timestep
-    static const int v0 = 120;        //initial speed
-    static const int eta0 = 600;      //viscosity coefficient
-    static const int l = 5;           //car length*/
+    int mode;
+    int NLANES = 2;
+
+    static constexpr float tau = 0.5; //relaxation time in min
+    static const int th0 = 45;        //initial velocity variance in (km/h)^2
+    static const int k0 = 600;        //flux of velocity variance in km/h
+    static constexpr float dt = 0.75; //reaction time in s
+    static const int v0 = 120;        //initial speed in km/h
+    static const int eta0 = 600;      //viscosity coefficient in km/h
+    static constexpr float l = 0.005;     //vehicle length in km
+    static constexpr float rhomax = 1 / l;
 };
 
 #endif // MAINWINDOW_H

@@ -4,9 +4,10 @@ Site::Site() {
 
 }
 
-Site::Site(float density) {
+Site::Site(float density, float velocity, float variance) {
     this->density = density;
-    this->velocity = 1;
+    this->velocity = velocity;
+    this->variance = variance;
 }
 
 float Site::optimalVelocity(float pn, float pc) {
@@ -21,10 +22,18 @@ void Site::setVelocity(float v) {
     velocity = v;
 }
 
+void Site::setVariance(float th) {
+    variance = th;
+}
+
 float Site::getDensity() {
     return density;
 }
 
 float Site::getVelocity() {
     return velocity;
+}
+
+float Site::getVariance() {
+    return variance;
 }
